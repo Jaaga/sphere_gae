@@ -45,8 +45,8 @@
       <h1>Stakeholders</h1>
       <div class="columns">
          <ul>
-        %for key in data:
-        <li><a href="/stakeholder/{{key}}">{{key}}</a></li>
+        %for name in stakeholders:
+        <li><a href="/stakeholder/{{name}}">{{name}}</a></li>
         %end
       </div>
     </div>

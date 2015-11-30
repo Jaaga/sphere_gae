@@ -37,22 +37,33 @@
     <h1 class="content-head is-center"><a href="/">Jaaga - Project Sphere</a></h1>
     <h4 class="content-head is-center">Program design for socio-environmental entrepreneurs</h4>
 
-        <form class="pure-form" action="/" method="post">
-          <input name="phrase" type="text" placeholder="Search responses" />
-        </form>
+    <form class="pure-form" action="/" method="post">
+      <input name="phrase" type="text" placeholder="Search responses" />
+    </form>
 
+    <h2 class="content-head is-center">Your search for <b>{{phrase}}</b> yielded {{count}} results</h2>
 
-    %if count > 0:
-    <h2 class="content-head is-center">Your search for "{{phrase}}" yielded {{count}} results</h2>
-    %end
 
     <div class="table-responsive">
       <table class="center mq-table pure-table-horizontal pure-table-striped pure-table">
-        %for result in results:
-        <tr>
-          <td>{{result[0]}} </td>
-          <td>{{result[1]}} </td>
-        </tr>
+        %for q in qorder:
+          %if q in results:
+            <tr>
+              <td>
+                <b>{{q}}: {{questions[q]}}</b>
+                <ul>
+                  %for name in results[q]:
+                      <b>{{name}}:</b>
+                      <ul>
+                        %for result in results[q][name]:
+                          <li>{{result}}</li>
+                        %end
+                    </ul>
+                  %end
+                </ul>
+              </td>
+            </tr>
+          %end
         %end
       </table>
     </div>
