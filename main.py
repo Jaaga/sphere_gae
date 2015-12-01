@@ -21,7 +21,7 @@ qorder = ['1a', '1b', '2a', '2b', '3', '4a', '4b', '4c', '4d', '4e', '4f', '5a',
 # 'Orator', 'Documentor', 'Venue', 'Interview Code']
 
 #Short list of tags
-metadata_tags = ['Organisation', 'Name(s) of Interviewee(s)', 'Sector', 'Type']
+metadata_tags = ['Organisation', 'URL', 'Name(s) of Interviewee(s)', 'Sector', 'Type']
 
 # Define an handler for the root URL of our application.
 @bottle.get('/') # or @route('/login')

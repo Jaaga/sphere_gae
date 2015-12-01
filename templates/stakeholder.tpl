@@ -52,14 +52,20 @@
     <div class="table-responsive">
       <table class="center mq-table pure-table-horizontal pure-table-striped pure-table">
         %for key in tags:
+          %if key is not 'URL':
             <tr>
               <td>
-                <b>{{key}}</b>
+                  <b>{{key}}</b>
               </td>
               <td>
-                {{metadata[key][0]}}
+                %if key is 'Organisation':
+                  <a target="_blank" href="{{metadata['URL'][0]}}">{{metadata[key][0]}}</a>
+                %else:
+                  {{metadata[key][0]}}
+                %end
               </td>
             </tr>
+          %end
         %end
       </table>
     </div>
