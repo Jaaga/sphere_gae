@@ -12,6 +12,7 @@ bottle = Bottle()
 
 interviews = json.load( open('data/interviews.json', 'rb') )
 questions = json.load( open('data/questions.json', 'rb') )
+designChallenge = json.load( open('data/designchallenge.json', 'rb') )
 
 qorder = ['1a', '1b', '2a', '2b', '3', '4a', '4b', '4c', '4d', '4e', '4f', '5a', '5b', '6a', '6b', '6c', '6d', '7a',
 '7b', '7c', '7d', '8a', '8b', '8c', '8d', '8e', '9a', '9b', '10a', '10b', '10c', '10d', '10e', '10f', '11a', '11b', '11c',
@@ -21,12 +22,12 @@ qorder = ['1a', '1b', '2a', '2b', '3', '4a', '4b', '4c', '4d', '4e', '4f', '5a',
 # 'Orator', 'Documentor', 'Venue', 'Interview Code']
 
 #Short list of tags
-metadata_tags = ['Organisation', 'URL', 'Name(s) of Interviewee(s)', 'Sector', 'Type']
+metadata_tags = ['Organisation', 'URL', 'Name(s) of Interviewee(s)', 'Sector', 'Type', 'Interview Number', 'Interview Code']
 
 # Define an handler for the root URL of our application.
 @bottle.get('/') # or @route('/login')
 def index():
-    output = template('templates/index', stakeholders=interviews.keys(), get_url=bottle.get_url)
+    output = template('templates/index', designChallenge=designChallenge, stakeholders=interviews.keys(), get_url=bottle.get_url)
     return output
 
 @bottle.post('/')

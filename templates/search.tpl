@@ -33,9 +33,9 @@
 <body>
 
   <div class="content">
-
-    <h1 class="content-head is-center"><a href="/">Jaaga - Project Sphere</a></h1>
-    <h4 class="content-head is-center">Program design for socio-environmental entrepreneurs</h4>
+    <a target="_blank" href="http://jaaga.in"><img style="margin:0px auto;display:block" src="static/jaaga.jpg" alt="Jaaga Brandmark"></a>
+    <h1 class="content-head is-center"><a href="/">Project Sphere</a></h1>
+    <h4 class="content-head is-center">Design Research: Entrepreneurship in the socio-environmental sector</h4>
 
     <form class="pure-form" action="/" method="post">
       <input name="phrase" type="text" placeholder="Search responses" />

@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Program Design for Socio-Environmental Startups">
-
-  <title>Jaaga &ndash; Project Sphere &ndash; Responses</title>
+  <meta name="description" content="Design Research: Entrepreneurs in the socio-environmental sector">
+  <title>
+    Jaaga &ndash; Project Sphere &ndash; Responses
+  </title>
 
   <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
 
@@ -33,21 +34,29 @@
 <body>
 
   <div class="content">
-
-    <h1 class="content-head is-center"><a href="/">Jaaga - Project Sphere</a></h1>
-    <h4 class="content-head is-center">Program design for socio-environmental entrepreneurs</h4>
+    <a target="_blank" href="http://jaaga.in"><img style="margin:0px auto;display:block" src="static/jaaga.jpg" alt="Jaaga Brandmark"></a>
+    <h1 class="content-head is-center"><a href="/">Project Sphere</a></h1>
+    <h4 class="content-head is-center">Design Research: Entrepreneurship in the socio-environmental sector</h4>
 
     <form class="pure-form" action="/" method="post">
       <input name="phrase" type="text" placeholder="Search responses" />
     </form>
 
     <div id="content">
+      <h1>Design Challenge</h1>
+      <!-- <p style="font-size:16px">These questions guided the research process.</p> -->
+      <ol>
+        %for item in designChallenge.items():
+          <li style="font-size:14px">{{item[1]}}</li>
+        %end
+      </ol>
       <h1>Stakeholders</h1>
       <div class="columns">
          <ul>
-        %for name in stakeholders:
-        <li><a href="/stakeholder/{{name}}">{{name}}</a></li>
-        %end
+          %for name in stakeholders:
+            <li><a href="/stakeholder/{{name}}">{{name}}</a></li>
+          %end
+        </ul>
       </div>
     </div>
 
