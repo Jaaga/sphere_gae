@@ -28,6 +28,14 @@
   <link rel="stylesheet" type="text/css"
   href="{{ get_url('static', filename='marketing.css') }}" />
   <!--<![endif]-->
+  <!-- Nice little button to fold interview details-->
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  <script type="text/javascript">
+    $('.fold_meta').click(function() {
+      $('.metadata').toggle(500)
+    })
+  </script>
 
 </head>
 <body>
@@ -37,25 +45,39 @@
     <h1 class="content-head is-center"><a href="/">Jaaga - Project Sphere</a></h1>
     <h4 class="content-head is-center">Program design for socio-environmental entrepreneurs</h4>
 
-        <form class="pure-form" action="/" method="post">
-          <input name="phrase" type="text" placeholder="Search responses" />
-        </form>
+    <form class="pure-form" action="/" method="post">
+      <input name="phrase" type="text" placeholder="Search responses" />
+    </form>
 
+    <div class="table-responsive">
+      <table class="center mq-table pure-table-horizontal pure-table-striped pure-table">
+        %for key in tags:
+            <tr>
+              <td>
+                <b>{{key}}</b>
+              </td>
+              <td>
+                {{metadata[key][0]}}
+              </td>
+            </tr>
+        %end
+      </table>
+    </div>
 
     %if count > 0:
-    <h2 class="content-head is-center">Your search for "{{phrase}}" yielded {{count}} results</h2>
+    <h2 class="content-head is-center"><b>{{name}}</b> answered {{count}} questions</h2>
     %end
 
     <div class="table-responsive">
       <table class="center mq-table pure-table-horizontal pure-table-striped pure-table">
         %for question in qorder:
-          %if question in results:
+          %if question in responses:
             <tr>
               <td>
                 <b>{{question}}: {{questions[question]}}</b>
                 <ul>
-                %for result in results[question]:
-                  <li>{{result}}</li>
+                %for response in responses[question]:
+                  <li>{{response}}</li>
                 %end
               </ul></td>
             </tr>

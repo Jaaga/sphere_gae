@@ -17,6 +17,11 @@ qorder = ['1a', '1b', '2a', '2b', '3', '4a', '4b', '4c', '4d', '4e', '4f', '5a',
 '7b', '7c', '7d', '8a', '8b', '8c', '8d', '8e', '9a', '9b', '10a', '10b', '10c', '10d', '10e', '10f', '11a', '11b', '11c',
 '12a', '12b', '12c', '13a', '13b', '13c', '13d', '13e', '13f', '13g', '13h', '13i', '14a', '14b']
 
+# metadata_tags = ['Organisation', 'Name(s) of Interviewee(s)', 'Sector', 'Type', 'Interview Number', 'Date and Time', 'Duration',
+# 'Orator', 'Documentor', 'Venue', 'Interview Code']
+
+#Short list of tags
+metadata_tags = ['Organisation', 'Name(s) of Interviewee(s)', 'Sector', 'Type']
 
 # Define an handler for the root URL of our application.
 @bottle.get('/') # or @route('/login')
@@ -29,8 +34,6 @@ def do_search():
     phrase = request.forms.get('phrase')
     count, results = search(interviews, phrase)
     if phrase:
-        # output = template('Your search for <b>{{phrase}}</b> yielded {{count}} results', phrase=phrase, count=count, get_url=bottle.get_url)
-        # output = template('templates/search', phrase=phrase, count=count, qorder=qorder, questions=questions, results=results, get_url=bottle.get_url)
         output = template('templates/search', phrase=phrase, count=count, qorder=qorder, questions=questions, results=results, get_url=bottle.get_url)
         return output
     else:
@@ -38,9 +41,9 @@ def do_search():
 
 @bottle.route('/stakeholder/<name>')
 def show_stakeholder(name='Saahas'):
-    results = interviews[name]['responses']
-    count = len(results)
-    output = template('templates/stakeholder', phrase=name, count=count, qorder=qorder, questions=questions, results=results, get_url=bottle.get_url)
+    responses = interviews[name]['responses']
+    count = len(responses)
+    output = template('templates/stakeholder', name=name, count=count, tags=metadata_tags, metadata=interviews[name]['metadata'], qorder=qorder, questions=questions, responses=responses, get_url=bottle.get_url)
     return output
 
 @bottle.route('/static/<filename>', name='static')
@@ -69,8 +72,3 @@ def search(interviews, phrase):
                         results[question][name].append(response)
                         count += 1
     return(count, results)
-
-# def search(interviews, phrase):
-#     count = 10
-#     results = interviews['Saahas']['metadata']
-#     return(count, results)
