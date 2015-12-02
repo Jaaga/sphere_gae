@@ -1,5 +1,5 @@
 <div id="content">
-<h1>Stakeholders</h1>
+<h1>Stakeholders Interviewed</h1>
 <div class="columns">
    <ul>
     %for name in stakeholders:
