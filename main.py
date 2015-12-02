@@ -27,7 +27,7 @@ metadata_tags = ['Organisation', 'URL', 'Name(s) of Interviewee(s)', 'Sector', '
 # Define an handler for the root URL of our application.
 @bottle.get('/') # or @route('/login')
 def index():
-    output = template('templates/index', designChallenge=designChallenge, stakeholders=interviews.keys(), get_url=bottle.get_url)
+    output = template('templates/index', designChallenge=designChallenge, stakeholders=interviews.keys(), qorder=qorder, questions=questions, get_url=bottle.get_url)
     return output
 
 @bottle.post('/')
@@ -40,11 +40,27 @@ def do_search():
     else:
         return "<p>Search failed.</p>"
 
+@bottle.route('/search/<phrase>')
+def do_search2(phrase='Jaaga'):
+    count, results = search(interviews, phrase)
+    if phrase:
+        output = template('templates/search', phrase=phrase, count=count, qorder=qorder, questions=questions, results=results, get_url=bottle.get_url)
+        return output
+    else:
+        return "<p>Search failed.</p>"
+
+
 @bottle.route('/stakeholder/<name>')
 def show_stakeholder(name='Saahas'):
     responses = interviews[name]['responses']
     count = len(responses)
     output = template('templates/stakeholder', name=name, count=count, tags=metadata_tags, metadata=interviews[name]['metadata'], qorder=qorder, questions=questions, responses=responses, get_url=bottle.get_url)
+    return output
+
+@bottle.route('/question/<qnumber>')
+def show_question(qnumber='1a'):
+    count, results = showQ(interviews, qnumber)
+    output = template('templates/search', phrase="Question "+qnumber, count=count, qorder=qorder, questions=questions, results=results, get_url=bottle.get_url)
     return output
 
 @bottle.route('/static/<filename>', name='static')
@@ -61,15 +77,29 @@ def error_404(error):
 def search(interviews, phrase):
     results = {}
     count = 0
-    for question in qorder:
+    for qnumber in qorder:
         for name in interviews.keys():
-            if question in interviews[name]['responses']:
-                for response in interviews[name]['responses'][question]:
-                    if all(word in response.lower() for word in phrase.lower().split()):
-                        if question not in results:
-                            results[question] = {}
-                        if name not in results[question]:
-                            results[question][name] = []
-                        results[question][name].append(response)
+            if qnumber in interviews[name]['responses']:
+                for response in interviews[name]['responses'][qnumber]:
+                    if all(word in response.lower() or word in questions[qnumber] for word in phrase.lower().split()):
+                        if qnumber not in results:
+                            results[qnumber] = {}
+                        if name not in results[qnumber]:
+                            results[qnumber][name] = []
+                        results[qnumber][name].append(response)
                         count += 1
+    return(count, results)
+
+def showQ(interviews, qnumber):
+    results = {}
+    count = 0
+    for name in interviews.keys():
+        if qnumber in interviews[name]['responses']:
+            for response in interviews[name]['responses'][qnumber]:
+                if qnumber not in results:
+                    results[qnumber] = {}
+                if name not in results[qnumber]:
+                    results[qnumber][name] = []
+                results[qnumber][name].append(response)
+                count += 1
     return(count, results)
