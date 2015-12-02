@@ -1,13 +1,13 @@
 <div id="content">
 <div class="table-responsive">
   <table style="font-size:14px" class="center mq-table pure-table-horizontal pure-table-striped pure-table">
-    %for question in qorder:
-      %if question in responses:
+    %for qnumber in qorder:
+      %if qnumber in responses:
         <tr>
           <td>
-            <b>{{question}}: {{questions[question]}}</b>
+            <b>{{qnumber}}: {{questions[qnumber]}}</b>
             <ol>
-            %for response in responses[question]:
+            %for response in responses[qnumber]:
               <li>{{response}}</li>
             %end
             </ol>
