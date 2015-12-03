@@ -8,7 +8,7 @@
             <b>{{qnumber}}: {{questions[qnumber]}}</b>
             <ul>
               %for name in results[qnumber]:
-                  <b>{{name}}:</b>
+                  <b>{{name}} ({{interviews[name]['metadata']['Type'][0]}} | {{interviews[name]['metadata']['Sector'][0]}}):</b>
                   <ul>
                     %for result in results[qnumber][name]:
                       <li>{{result}}</li>

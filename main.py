@@ -38,7 +38,7 @@ metadata_tags = ['Organisation', 'URL', 'Name(s) of Interviewee(s)', 'Sector', '
 # Define an handler for the root URL of our application.
 @bottle.get('/') # or @route('/login')
 def index():
-    output = template('templates/index', designChallenge=designChallenge, stakeholders=sortedStakeholders, qorder=qorder, questions=questions, sectors=sectors, types=orgtypes, get_url=bottle.get_url)
+    output = template('templates/index', designChallenge=designChallenge, stakeholders=sortedStakeholders, get_url=bottle.get_url)
     return output
 
 @bottle.post('/')
@@ -46,7 +46,7 @@ def doSearch():
     phrase = request.forms.get('phrase')
     count, results = search(interviews, phrase)
     if phrase:
-        output = template('templates/search', phrase=phrase, count=count, qorder=qorder, questions=questions, results=results, get_url=bottle.get_url)
+        output = template('templates/search', phrase=phrase, count=count, qorder=qorder, questions=questions, results=results, interviews=interviews, get_url=bottle.get_url)
         return output
     else:
         return "<p>Search failed.</p>"
@@ -55,7 +55,7 @@ def doSearch():
 def doSearch2(phrase='Jaaga'):
     count, results = search(interviews, phrase)
     if phrase:
-        output = template('templates/search', phrase=phrase, count=count, qorder=qorder, questions=questions, results=results, get_url=bottle.get_url)
+        output = template('templates/search', phrase=phrase, count=count, qorder=qorder, questions=questions, results=results, interviews=interviews, get_url=bottle.get_url)
         return output
     else:
         return "<p>Search failed.</p>"
@@ -86,7 +86,7 @@ def showQuestion(qnumber='1a'):
                     results[qnumber][name] = []
                 results[qnumber][name].append(response)
                 count += 1
-    output = template('templates/search', phrase="Question "+qnumber, count=count, qorder=qorder, questions=questions, results=results, get_url=bottle.get_url)
+    output = template('templates/search', phrase="Question "+qnumber, count=count, qorder=qorder, questions=questions, results=results, interviews=interviews, get_url=bottle.get_url)
     return output
 
 @bottle.route('/sectors/')
@@ -109,7 +109,7 @@ def showSector(sector='Waste'):
                             results[qnumber][name] = []
                         results[qnumber][name].append(response)
                         count += 1
-    output = template('templates/search', phrase="Sector "+sector, count=count, qorder=qorder, questions=questions, results=results, get_url=bottle.get_url)
+    output = template('templates/search', phrase="Sector "+sector, count=count, qorder=qorder, questions=questions, results=results, interviews=interviews, get_url=bottle.get_url)
     return output
 
 @bottle.route('/types/')
@@ -132,7 +132,7 @@ def showType(type='For Profit'):
                             results[qnumber][name] = []
                         results[qnumber][name].append(response)
                         count += 1
-    output = template('templates/search', phrase="Organisation type: "+type, count=count, qorder=qorder, questions=questions, results=results, get_url=bottle.get_url)
+    output = template('templates/search', phrase="Organisation type: "+type, count=count, qorder=qorder, questions=questions, results=results, interviews=interviews, get_url=bottle.get_url)
     return output
 
 @bottle.route('/static/<filename>', name='static')
