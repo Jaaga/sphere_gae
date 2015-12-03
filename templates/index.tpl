@@ -15,7 +15,10 @@
 
     % include('templates/stakeholderlist.tpl')
 
-    % include('templates/questionlist.tpl')
+    <div id="content">
+
+      <h1>Other Ways to Browse</h1>
+      <p style="font-size:14px"> You can also browse the information by <a href="/questions/">Question</a>, <a href="/sectors/">Sector</a> and <a href="/types/">Organisation type</a>.</p> 
 
     </div>
 
