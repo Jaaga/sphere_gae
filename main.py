@@ -35,6 +35,7 @@ qorder = ['1a', '1b', '2a', '2b', '3', '4a', '4b', '4c', '4d', '4e', '4f', '5a',
 #Short list of tags
 metadata_tags = ['Organisation', 'URL', 'Name(s) of Interviewee(s)', 'Sector', 'Type', 'Interview Number', 'Interview Code']
 
+
 # Define an handler for the root URL of our application.
 @bottle.get('/') # or @route('/login')
 def index():
@@ -68,6 +69,7 @@ def showStakeholder(name='Saahas'):
     output = template('templates/stakeholder', name=name, count=count, tags=metadata_tags, metadata=interviews[name]['metadata'], qorder=qorder, questions=questions, responses=responses, get_url=bottle.get_url)
     return output
 
+@bottle.route('/questions')
 @bottle.route('/questions/')
 def showQuestionList():
     output = template('templates/questions', qorder=qorder, questions=questions, get_url=bottle.get_url)
@@ -89,6 +91,7 @@ def showQuestion(qnumber='1a'):
     output = template('templates/search', phrase="Question "+qnumber, count=count, qorder=qorder, questions=questions, results=results, interviews=interviews, get_url=bottle.get_url)
     return output
 
+@bottle.route('/sectors')
 @bottle.route('/sectors/')
 def showSectorList():
     output = template('templates/sectors', qorder=qorder, sectors=sectors, get_url=bottle.get_url)
@@ -112,6 +115,7 @@ def showSector(sector='Waste'):
     output = template('templates/search', phrase="Sector "+sector, count=count, qorder=qorder, questions=questions, results=results, interviews=interviews, get_url=bottle.get_url)
     return output
 
+@bottle.route('/types')
 @bottle.route('/types/')
 def showTypeList():
     output = template('templates/types', qorder=qorder, types=orgtypes, get_url=bottle.get_url)
@@ -143,7 +147,7 @@ def server_static(filename):
 @bottle.error(404)
 def error_404(error):
     """Return a custom 404 error."""
-    return 'Sorry, Nothing at this URL.'
+    return 'Sorry, Nothing at this URL. Click <a href="/"">here</a> to return to the landing page.'
 
 
 def search(interviews, phrase):
