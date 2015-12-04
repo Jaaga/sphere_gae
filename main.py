@@ -151,9 +151,13 @@ def search(interviews, phrase):
     count = 0
     for qnumber in qorder:
         for name in interviews.keys():
+            code = interviews[name]['metadata']['Interview Code'][0] + '-' + qnumber
             if qnumber in interviews[name]['responses']:
+                rcount = 0
                 for response in interviews[name]['responses'][qnumber]:
-                    if all(word in response.lower() or word in questions[qnumber] for word in phrase.lower().split()):
+                    rcount += 1
+                    code = code + '-' + str(rcount)
+                    if all(word in response.lower() or word in questions[qnumber] or word in code for word in phrase.lower().split()):
                         if qnumber not in results:
                             results[qnumber] = {}
                         if name not in results[qnumber]:

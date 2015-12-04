@@ -8,12 +8,12 @@
             <b>{{qnumber}}: {{questions[qnumber]}}</b>
             <ul>
               %for name in results[qnumber]:
-                  <b>{{name}} ({{interviews[name]['metadata']['Type'][0]}} | {{interviews[name]['metadata']['Sector'][0]}}):</b>
-                  <ul>
+                  <b>{{name}}</b> ({{interviews[name]['metadata']['Type'][0]}} | {{interviews[name]['metadata']['Sector'][0]}}):
+                  <ol>
                     %for result in results[qnumber][name]:
                       <li>{{result}}</li>
                     %end
-                </ul>
+                </ol>
               %end
             </ul>
           </td>
