@@ -3,7 +3,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Design Research: Entrepreneurs in the socio-environmental sector">
   <title>
-    Jaaga &ndash; Project Sphere
+    Jaaga Startup &ndash; Project Sphere
   </title>
 
   <link rel="stylesheet" type="text/css"
@@ -13,7 +13,7 @@
   href="{{ get_url('static', filename='marketing.css') }}" />
 
   <link rel="shortcut icon" type="image/ico"
-  href="{{ get_url('static', filename='jaaga_favicon.gif') }}" />
+  href="{{ get_url('static', filename='JaagaStartupIcon.jpg') }}" />
 
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
